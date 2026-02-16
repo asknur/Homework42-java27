@@ -6,6 +6,8 @@ import java.net.Socket;
 public class Client {
     private Socket socket;
     private PrintWriter printWriter;
+    private String name;
+    private static int n = 1;
 
     public Client(Socket socket, PrintWriter printWriter) {
         this.socket = socket;
@@ -20,5 +22,7 @@ public class Client {
         return printWriter;
     }
 
-
+    public String getName() {
+        return "Client" + n++;
+    }
 }
