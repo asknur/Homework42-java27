@@ -25,7 +25,7 @@ public class ClientHandler {
 
             while (true) {
                 String message = reader.nextLine();
-                System.out.printf("%s: %s%n",  client,message);
+                System.out.printf("%s: %s%n", socket, message);
                 if (isEmptyMsg(message) || isQuitMsg(message)) {
                     System.out.printf("Пользователь %s отключился%n", socket.getPort());
                     break;
@@ -72,10 +72,12 @@ public class ClientHandler {
     }
 
     private static void broadcast(String message, Client sender) {
+        String messageWithName = sender.getName().strip() + ": " + message;
+
         for (Client client : clients) {
             if (client != sender) {
                 PrintWriter writer = client.getWriter();
-                writer.println(message);
+                writer.println(messageWithName);
                 writer.flush();
 
             }
